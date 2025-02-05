@@ -29,7 +29,7 @@ public class ChessMove {
      */
     public ChessPosition getEndPosition() {
         throw new RuntimeException("Not implemented");
-                ;
+
     }
 
     /**
