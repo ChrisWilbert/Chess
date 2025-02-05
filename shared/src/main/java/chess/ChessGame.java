@@ -2,18 +2,13 @@ package chess;
 
 import java.util.Collection;
 
-/**
- * For a class that can manage a chess game, making moves on a board
- * <p>
- * Note: You can add to this class, but you may not alter
- * signature of the existing methods.
- */
 public class ChessGame {
     private ChessBoard board;
     private TeamColor currentTurn;
+
     public ChessGame() {
-    board = new ChessBoard();
-    currentTurn = TeamColor.WHITE;
+        board = new ChessBoard();
+        currentTurn = TeamColor.WHITE;
     }
 
     /**
@@ -49,16 +44,11 @@ public class ChessGame {
      * startPosition
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
-        return null; }
-
+        return null;
     }
 
-    /**
-     * Makes a move in a chess game
-     *
-     * @param move chess move to perform
-     * @throws InvalidMoveException if move is invalid
-     */
+
+
     public void makeMove(ChessMove move) throws InvalidMoveException {
 
 
