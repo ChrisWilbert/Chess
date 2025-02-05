@@ -7,8 +7,11 @@ package chess;
  * signature of the existing methods.
  */
 public class ChessPosition {
-
+    private int x;
+    private int y;
     public ChessPosition(int row, int col) {
+        x = row;
+        y = col;
     }
 
     /**
