@@ -71,36 +71,40 @@ public class ChessPiece {
        Collection<ChessMove> allMoves = new ArrayList<>();
         ChessGame.TeamColor myColor = this.getTeamColor();
         switch (this.type) {
-            case PieceType.ROOK:
-                int[][] rookMoves = {{1,0}, {0,1}, {-1,0}, {0,-1}
-                };
-                for (int[] move : rookMoves) {
-                    int r = myPosition.getRow() + move[0];
-                    int c = myPosition.getColumn()+ move[1];
-                    if (r >= 1 && c >= 1 && r <= 8 && c <= 8) {
+            case ROOK:
+            case BISHOP:
+            case QUEEN:
+                int[][] directions;
+                if (type == PieceType.ROOK) {
+                    directions = new int[][]{{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
+                }
+                else if (type == PieceType.BISHOP) {
+                   directions = new int[][] {{1,1}, {1,-1}, {-1,1}, {-1,-1}};
+                } else {
+                    directions = new int[][]{{1, 1}, {1, 0}, {1, -1}, {0, 1}, {-1, 1}, {-1, 0}, {-1, -1}, {0, -1}
+                    };
+                }
+                for (int[] dir : directions) {
+                    int r = myPosition.getRow() + dir[0];
+                    int c = myPosition.getColumn()+ dir[1];
+                    while(r >= 1 && c >= 1 && r <= 8 && c <= 8) {
                         ChessPosition newPosition = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(newPosition);
-                        if (target == null || target.getTeamColor() != myColor) {
+
+                        if (target == null) {
                             allMoves.add(new ChessMove(myPosition,newPosition, null));
                         }
-                    }
-                }
-                break;
-            case PieceType.BISHOP:
-                int[][] bishopMoves = {{1,1}, {1,-1}, {-1,1}, {-1,-1}
-                };
-                for (int[] move : bishopMoves) {
-                    int r = myPosition.getRow() + move[0];
-                    int c = myPosition.getColumn()+ move[1];
-                    if (r >= 1 && c >= 1 && r <= 8 && c <= 8) {
-                        ChessPosition newPosition = new ChessPosition(r, c);
-                        ChessPiece target = board.getPiece(newPosition);
-                        if (target == null || target.getTeamColor() != myColor) {
-                            allMoves.add(new ChessMove(myPosition,newPosition, null));
+                        else  {
+                            if (target.getTeamColor() != myColor) {
+                                allMoves.add(new ChessMove(myPosition,newPosition, null));
+                            }
+                            break;
                         }
+                        r += dir[0];
+                        c += dir[1];
                     }
                 }
-                break;
+
             case PieceType.KNIGHT:
                 int[][] knightMoves = {{2,1}, {1,2}, {-1,2}, {1,-2}, {-2,1}, {-2,-1},{-1,-2},{2,-1}
                 };
@@ -116,21 +120,7 @@ public class ChessPiece {
                     }
                 }
                 break;
-            case PieceType.QUEEN:
-                int[][] queenMoves = {{1,1},{1,0}, {1,-1},{0,1}, {-1,1},{-1,0} ,{-1,-1}, {0,-1}
-                };
-                for (int[] move : queenMoves) {
-                    int r = myPosition.getRow() + move[0];
-                    int c = myPosition.getColumn()+ move[1];
-                    if (r >= 1 && c >= 1 && r <= 8 && c <= 8) {
-                        ChessPosition newPosition = new ChessPosition(r, c);
-                        ChessPiece target = board.getPiece(newPosition);
-                        if (target == null || target.getTeamColor() != myColor) {
-                            allMoves.add(new ChessMove(myPosition,newPosition, null));
-                        }
-                    }
-                }
-                break;
+
             case PieceType.KING:
                 int[][] kingMoves = {{1,1},{1,0}, {1,-1},{0,1}, {-1,1},{-1,0} ,{-1,-1}, {0,-1}
                 };
