@@ -161,7 +161,7 @@ public class ChessPiece {
                     if (r >= 1 && c >= 1 && r <= 8 && c <= 8) {
                         ChessPosition capturePosition = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(capturePosition);
-                        if (target == null && target.getTeamColor() != myColor) {
+                        if (target != null && target.getTeamColor() != myColor) {
                             if (r == 8 || r == 1) {
                                 addPawnPromotions(allMoves, myPosition, capturePosition);
                             }
