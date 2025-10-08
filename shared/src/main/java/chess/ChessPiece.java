@@ -104,7 +104,7 @@ public class ChessPiece {
                         c += dir[1];
                     }
                 }
-
+                break;
             case PieceType.KNIGHT:
                 int[][] knightMoves = {{2,1}, {1,2}, {-1,2}, {1,-2}, {-2,1}, {-2,-1},{-1,-2},{2,-1}
                 };
